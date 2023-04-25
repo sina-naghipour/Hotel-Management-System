@@ -1,0 +1,18 @@
+[
+    {
+        "id": "1e1ae181-897b-4e6e-95b6-634f472432fd",
+        "name": "archive",
+        "route": "/archive",
+        "subMenuList": [
+            "f4fd20f7-b224-411a-9886-35890ed057c1"
+        ],
+        "iconName": "/static/icons/menu/1.png"
+    },
+    {
+        "id": "f4fd20f7-b224-411a-9886-35890ed057c1",
+        "name": "users",
+        "route": "/users",
+        "parentID": "ee",
+        "iconName": "/static/icons/menu/1.png"
+    }
+]
