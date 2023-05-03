@@ -2,6 +2,17 @@ import sqlite3
 import sys, os
 import json
 
+# {
+#     "id" : "94418fe2-5d17-4bd7-a6fe-a219b78d00c9",
+#     "roomNumber" : 101,
+#     "roomStatus" : "FREE",
+#     "customerID" : "21dfb887-b13f-4436-9195-2a59590a7619",
+#     "bedCount" : 1,
+#     "privateWC" : 0,
+#     "AC" : 0,
+#     "roomType" : 2
+# }
+
 class Room:
  
     currentObject = {}
@@ -47,19 +58,25 @@ class Room:
     # CRUD Section : get, add, update, delete A Room
     
     def getRoomByID(self, id):
-        rooms = self.cur.execute(f'SELECT * FROM rooms WHERE id = \'{id}\'').fetchall()
-        return rooms
+        room = self.cur.execute(f'SELECT * FROM rooms WHERE id = \'{id}\'').fetchone()
+        return room
+
+    
+    def updateRoom(self,id, property, key):
+        try:
+            self.cur.execute(f'UPDATE rooms SET {property} = \'{key}\' WHERE id=\'{id}\'')
+        except Exception as e:
+            raise e
+        return 'Update Completed'
 
 
-    
-    def addRoom(self, object):
-        pass
-    
-    def updateRoom(self, property, key):
-        pass
-    
     def deleteRoom(self, id):
-        pass
+        try:
+            self.cur.execute(f'DELETE FROM rooms WHERE id=\'{id}\'')
+        except Exception as e:
+            raise e
+        return 'Delete Completed'
+        
     
     # Property Getters
     
@@ -98,30 +115,6 @@ class Room:
         room = self.cur.execute(f'SELECT * FROM rooms WHERE id = \'{id}\'').fetchone()
         return room[7]
 
-    
-    # Property Setters
-    
-    def setNumber(self, id):
-        pass
-    
-    def setStatus(self, id):
-        pass
-    
-    def setCustomerID(self, id):
-        pass
-    
-    def setBedCount(self, id):
-        pass
-    
-    def setPrivateWC(self, id):
-        pass
-    
-    def setAC(self, id):
-        pass
-    
-    def setType(self, id):
-        pass
-    
     # Make A Room :
     # this section works with the class variable current object
     # the primary porpuse of this is to ease the workflow of scaling the project
@@ -130,7 +123,11 @@ class Room:
         pass
     
     def save(self):
-        pass
+        try:
+            self.db.commit()
+        except Exception as e:
+            raise e
+        return 'SUCCESS'
     
     def delete(self):
         pass

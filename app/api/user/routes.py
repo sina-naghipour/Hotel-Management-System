@@ -20,7 +20,7 @@ def authPage():
 def auth():
     user = json.dumps(request.json)
     user = json.loads(user)
-    
+
     obj = User()
     result = obj.getUserByUsername(user['username'])
     
@@ -41,7 +41,7 @@ def auth():
 @users.route('/logout', methods=['POST'])
 def logout():
     token = request.headers.get('Authorization')
-    
+ 
     for key, item in session.items():
         if item == token:
             session.pop(key, None)
