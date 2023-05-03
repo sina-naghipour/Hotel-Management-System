@@ -1,31 +1,56 @@
+import sqlite3
+import sys, os
+import json
+
 class Room:
  
     currentObject = {}
     
     def __init__(self):
-        pass
+        self.db = sqlite3.connect('../hms.db')
+        self.cur = self.db.cursor()
+        
     
     # Useful & Common Getters
     
     def getRooms(self):
-        pass
+        rooms = self.cur.execute(f'SELECT * FROM rooms').fetchall()
+        return rooms
 
-    def getRoomsByType(self):
-        pass
+
+    def getRoomsByType(self, type):
+        rooms = self.cur.execute(f'SELECT * FROM rooms WHERE roomType = \'{type}\'').fetchall()
+        return rooms
+
+    def getRoomsByCustomerID(self, id):
+        rooms = self.cur.execute(f'SELECT * FROM rooms WHERE customerID = \'{id}\'').fetchall()
+        return rooms
+
     
-    def getRoomsByStatus(self):
-        pass
+    def getRoomsByStatus(self, status):
+        rooms = self.cur.execute(f'SELECT * FROM rooms WHERE roomStatus = \'{status}\'').fetchall()
+        return rooms
+
     
-    def getRoomsByNumber(self):
-        pass
+    def getRoomsByNumber(self, number):
+        rooms = self.cur.execute(f'SELECT * FROM rooms WHERE roomNumber = \'{number}\'').fetchall()
+        return rooms
+
+
     
-    def getRoomsByBedCount(self):
-        pass
+    def getRoomsByBedCount(self, count):
+        rooms = self.cur.execute(f'SELECT * FROM rooms WHERE bedCount = \'{count}\'').fetchall()
+        return rooms
+
+
     
     # CRUD Section : get, add, update, delete A Room
     
     def getRoomByID(self, id):
-        pass
+        rooms = self.cur.execute(f'SELECT * FROM rooms WHERE id = \'{id}\'').fetchall()
+        return rooms
+
+
     
     def addRoom(self, object):
         pass
@@ -39,25 +64,40 @@ class Room:
     # Property Getters
     
     def getNumber(self, id):
-        pass
+        room = self.cur.execute(f'SELECT * FROM rooms WHERE id = \'{id}\'').fetchone()
+        return room[1]
+
+
     
     def getStatus(self, id):
-        pass
+        room = self.cur.execute(f'SELECT * FROM rooms WHERE id = \'{id}\'').fetchone()
+        return room[2]
+
     
     def getCustomerID(self, id):
-        pass
+        room = self.cur.execute(f'SELECT * FROM rooms WHERE id = \'{id}\'').fetchone()
+        return room[3]
+
     
     def getBedCount(self, id):
-        pass
+        room = self.cur.execute(f'SELECT * FROM rooms WHERE id = \'{id}\'').fetchone()
+        return room[4]
+
     
     def getprivateWC(self, id):
-        pass
+        room = self.cur.execute(f'SELECT * FROM rooms WHERE id = \'{id}\'').fetchone()
+        return room[5]
+
     
     def getAC(self, id):
-        pass
+        room = self.cur.execute(f'SELECT * FROM rooms WHERE id = \'{id}\'').fetchone()
+        return room[6]
+
     
     def getType(self, id):
-        pass
+        room = self.cur.execute(f'SELECT * FROM rooms WHERE id = \'{id}\'').fetchone()
+        return room[7]
+
     
     # Property Setters
     

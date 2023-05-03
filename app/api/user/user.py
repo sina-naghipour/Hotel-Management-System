@@ -12,7 +12,6 @@ class User:
     def __init__(self, id=None):
 
         self.db = sqlite3.connect('../hms.db')
-        print(os.getcwd())
         self.cur = self.db.cursor()
         if id != None :
             self.currentUser = self.cur.execute(f'SELECT * FROM users WHERE id=\'{id}\'').fetchone()
